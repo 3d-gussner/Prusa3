@@ -53,14 +53,19 @@ module z_bottom_holes(){
   // motor mounting
   translate([25+4.3,21,-1]){
     for (i=[-1,1]) for (j=[-1,1]) {
-      #translate([i*13,j*13,-1]) cylinder(h = 20, r=1.8, $fn=30);
+      translate([i*13,j*13,-1]) cylinder(h = 20, r=1.8, $fn=30);
     }
   }
 }
 
 // Final part
 module z_bottom_holder(){
-  for (i=[0,1]) mirror([0,i,0]) translate([0,8,0]) difference(){
+  for (i=[0,1]) mirror([0,i,0]) translate([0,8,0]) z_axis_bottom();
+}
+
+module z_axis_bottom()
+{
+  difference(){
     z_bottom_base();
     z_bottom_fancy();
     z_bottom_holes();

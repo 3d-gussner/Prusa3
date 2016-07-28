@@ -6,7 +6,7 @@
 // http://prusamendel.org
 
 
-module corner_base(){	
+module corner_base(){
  translate([-9,-11,0])cube([18,22,47]);
 }
 
@@ -24,7 +24,7 @@ module corner_holes(){
 
   // Top smooth rod insert
   // Smooth rod place
-  translate([11,2,45]) rotate([0,90,90]) cylinder(h = 270, r=4.2, $fn=30); 
+  translate([11,2,45]) rotate([0,90,90]) cylinder(h = 270, r=4.2, $fn=30);
   // Ziptie
   translate([-5,9,39])  cube([30,3.5,2]);
  }
@@ -44,13 +44,13 @@ module corner_fancy(){
 
 
 // Final part
-module corner(){
+module y_corners(){
  // Rotate the part for better printing
- translate([0,0,11]) rotate([-90,0,0]) difference(){
+ rotate([90,0,0]) translate([0,0,11]) rotate([-90,0,0]) difference(){
   corner_base();
   corner_holes();
   corner_fancy();
  }
 }
 
-rotate([90,0,0]) corner();
+corner();
