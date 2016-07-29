@@ -7,25 +7,16 @@
 
 use <x-end.scad>
 
-module x_end_idler_base(){
- x_end_base();
-}
-
-module x_end_idler_holes(){
- x_end_holes();
- translate(v=[0,-22,30.25]) rotate(a=[0,-90,0]) cylinder(h = 80, r=2.2, $fn=30);
- translate(v=[1.5,-22,30.25]) rotate(a=[0,-90,0]) cylinder(h = 10, r=4.4, $fn=30);
- // translate(v=[-21.5,-22,30.25]) rotate(a=[0,-90,0]) rotate(a=[0,0,30]) cylinder(h = 10, r=4.4, $fn=6);
-}
- 
-// Final part
-module x_end_idler(){
- mirror([0,1,0]) difference(){
-  x_end_idler_base();
-  x_end_idler_holes();
- }
+module x_end_idler()
+{
+    mirror([0,1,0]) difference(){
+        x_end_base();
+        x_end_holes();
+    }
 }
 
 x_end_idler();
 
-
+use <x-end-idler-tensioner.scad>
+% translate([-15,-12.7,30]) rotate([0,90,90]) tensioner_plate();
+% translate([-15,20,25]) rotate([0,0,-90]) tensioner_arm(length=50);

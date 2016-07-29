@@ -5,53 +5,63 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-module z_top_base(){
- translate([0,-5,0]) cube([8,45,16]); // plate touching the base
- translate([0,-5,0]) cube([30,5.01,12]); // plate touching the base
- translate([0,-5,0]) cube([38,15,5]); // plate touching the base
+module z_top_base()
+{
+  // plate touching the base
+  translate([0, -5, 0]) {
+    cube([41, 45, 6.9]);
+    cube([8, 45, 16]);
+    cube([30, 5.01, 12]);
+  }
 }
 
-module z_top_fancy(){
- // Corner cutouts
- translate([0.5,0.5,-2]) rotate([0,0,-45-180]) translate([-15,0,-1]) cube([30,30,51]);
- translate([0.5,40-0.5,-2]) rotate([0,0,-45+90]) translate([-15,0,-1]) cube([30,30,51]);
- translate([-4,40+5,-2]) rotate([0,0,-45-0]) translate([0,0,-1]) cube([30,30,51]);
- translate([8,0,12]) rotate([0,-45,0]) translate([0,-5-2,0]) cube([30,50,30]);
- translate([38-2.5,-5+2.5,-2]) rotate([0,0,-45-90]) translate([-15,0,-1]) cube([30,30,51]);
- translate([38-1.5,10-1.5,-2]) rotate([0,0,-45]) translate([-15,0,-1]) cube([30,30,51]);
- translate([0,0,5]) rotate([45+180,0,0]) rotate([0,0,-45+90]) translate([0,0,-15]) cube([30,30,30]);
+module z_top_fancy()
+{
+  // Corner cutouts
+  translate([0.5,0.5,-2]) rotate([0,0,-45-180]) translate([-15,0,-1]) cube([30,30,51]);
+  translate([0.5,40-0.5,-2]) rotate([0,0,-45+90]) translate([-15,0,-1]) cube([30,30,51]);
+  translate([38-2.5,-5+2.5,-2]) rotate([0,0,-45-90]) translate([-15,0,-1]) cube([30,30,51]);
+  translate([58,58,-2]) rotate([0,0,-45-180]) translate([-15,0,-1]) cube([30,30,51]);
+  translate([8,0,12]) rotate([0,-45,0]) translate([0,-5-2,0]) cube([30,50,30]);
+  translate([0,0,5]) rotate([45+180,0,0]) rotate([0,0,-45+90]) translate([0,0,-15]) cube([30,30,30]);
 
-// Stiffner cut out
- translate([30,0,5.5]) rotate([0,-45,0]) translate([0,-5-2,0]) cube([30,50,30]);
+  // Stiffner cut out
+  translate([30,0,7]) rotate([0,-45,0]) translate([0,-5-2,0]) cube([30,50,30]);
 }
 
-module z_top_holes(){
- // Screw holes
- translate([-1,10,10]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
- translate([-1,10+20,10]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
+module z_top_holes()
+{
+  // Screw holes
+  translate([-1,10,10]) rotate([0,90,0]) cylinder(h=20, r=1.8, $fn=30);
+  translate([-1,10+20,10]) rotate([0,90,0]) cylinder(h=20, r=1.8, $fn=30);
 
- // Screw heads
- translate([4,10,10]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
- translate([4,10-3.1,10]) cube([10,6.2,10]);
- translate([4,10+20,10]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
- translate([4,10+20-3.1,10]) cube([10,6.2,10]);
+  // Screw heads
+  translate([4,10,10]) rotate([0,90,0]) cylinder(h=20, r=3.1, $fn=30);
+  translate([4,10-3.1,10]) cube([10,6.2,10]);
+  translate([4,10+20,10]) rotate([0,90,0]) cylinder(h=20, r=3.1, $fn=30);
+  translate([4,10+20-3.1,10]) cube([10,6.2,10]);
 
- // Z rod holder
- translate([25+4.3,4.2,-1]) rotate([0,0,0]) cylinder(h = 50, r=4.1, $fn=15);
- translate([25+4.3-1,3,0.6]) cube([2,10,7]); // it's bit up because it helps with printing
+  // Ball bearing
+  translate([25+4.3,26.2,-1]) cylinder(h=10, d=13, $fn=20);
+  translate([25+4.3,26.2,2]) cylinder(h=10, d=22, $fn=30);
+  for (i=[-1,1]) translate([25+4.3-8.6*i,26.2+8.6*i,1]) cylinder(h=9, d=1.5, $fn=15);
+
+  // Z rod holder
+  translate([25+4.3,4.2,-1]) cylinder(h=10, r=4.1, $fn=15);
 }
 
 module z_axis_top()
 {
-    difference() {
-        z_top_base();
-        z_top_fancy();
-        z_top_holes();
-    }
+  difference() {
+    z_top_base();
+    z_top_fancy();
+    z_top_holes();
+  }
 }
 
 // Final part
-module z_top(){
+module z_top()
+{
     for (i=[0,1]) {
         mirror([0,i,0]) translate([0,10,0]) z_axis_top();
     }

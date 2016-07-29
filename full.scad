@@ -34,8 +34,8 @@ module y_axis_assembly() {
 % translate([0,-60,-110]) cylinder(d=8, h=200);
 % translate([0,60,-110]) cylinder(d=8, h=200);
 
-# translate([0,43.2,-110]) cylinder(d=8, h=200, $fn=12);
-# translate([0,-43.2,-110]) cylinder(d=8, h=200, $fn=12);
+# translate([0,38,-110]) cylinder(d=8, h=200, $fn=12);
+# translate([0,-38,-110]) cylinder(d=8, h=200, $fn=12);
 
 translate([29.3,-64.2, -80]) rotate([0,180,0]) z_axis_bottom();
 translate([29.3,64.2, -80]) rotate([0,180,0]) mirror([0,1,0]) z_axis_bottom();
@@ -43,12 +43,14 @@ translate([29.3,64.2, -80]) rotate([0,180,0]) mirror([0,1,0]) z_axis_bottom();
 translate([0,-60,0]) rotate([0,180,0]) x_end_idler();
 translate([0,60,0]) rotate([0,180,0]) x_end_motor();
 
-translate([29.3,-64.2, 60]) rotate([0,180,0]) z_axis_top();
-translate([29.3,64.2, 60]) rotate([0,180,0]) mirror([0,1,0]) z_axis_top();
+translate([29.3,-64.2, 90]) rotate([0,180,0]) z_axis_top();
+translate([29.3,64.2, 90]) rotate([0,180,0]) mirror([0,1,0]) z_axis_top();
 
-% translate([0,43.2,-80-5]) rotate(a=[0,0,0]) import("inc/nema14.stl", convexity=3);
 
-translate([0,43.2,5.3]) mirror([0,0,1]) color("white") leadscrew_bolt();
+
+% translate([0,38,-80-5]) rotate([0,0,0]) import("inc/nema14.stl", convexity=3);
+
+// translate([0,38,5.3]) mirror([0,0,1]) color("white") leadscrew_bolt();
 
 
 // % import("src/alu-frame.dxf", convexity=3);
