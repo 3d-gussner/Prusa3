@@ -7,40 +7,43 @@
 
 //include <configuration.scad>
 
-module y_motor_base() {
- // Motor holding part
- translate([29,-21+50,0]) {
-  translate([-21+4.5,0,5]) cube(size=[9,31,10], center=true);
-  translate([-15.5,-15.5,0]) cylinder(h=10, r=5.5);
-  translate([-15.5,+15.5,0]) cylinder(h=10, r=5.5);
-  // Joins motor holder and rod plate
-  translate([-29,-21,0]) cube(size=[14,30,10]);
- }
- // Front holding part
- translate([0,10,0]) cylinder(h=10, r=8);
- translate([0,20,5])cube(size=[16,20,10], center=true);
- translate([0,30,0])cylinder(h=10, r=8);
+module y_motor_base()
+{
+  // Motor holding part
+  translate([29,-21+50,0]) {
+    translate([-21+4.5,0,5]) cube(size=[9,31,10], center=true);
+    translate([-15.5,-15.5,0]) cylinder(h=10, r=5.5);
+    translate([-15.5,+15.5,0]) cylinder(h=10, r=5.5);
+    // Joins motor holder and rod plate
+    translate([-29,-21,0]) cube(size=[14,30,10]);
+  }
+  // Front holding part
+  translate([0,10,0]) cylinder(h=10, r=8);
+  translate([0,20,5])cube(size=[16,20,10], center=true);
+  translate([0,30,0])cylinder(h=10, r=8);
 }
 
-module y_motor_holes() {
- translate([29,-21+50,0]) {
-  // Screw head holes
-  translate([-15.5,-15.5,-1]) cylinder(h=10, r=1.7);
-  translate([-15.5,+15.5,-1]) cylinder(h=10, r=1.7);
-  // Screw holes
-  translate([-15.5,-15.5,7]) cylinder(h=7, r=3.5);
-  translate([-15.5,+15.5,7]) cylinder(h=7, r=3.5);
- }
- translate([0,10,-1]) cylinder(h=12, r=4.5);
- translate([0,30,-1]) cylinder(h=12, r=4.5);
+module y_motor_holes()
+{
+  translate([29,-21+50,0]) {
+    // Screw head holes
+    translate([-15.5,-15.5,-1]) cylinder(h=10, r=1.7);
+    translate([-15.5,+15.5,-1]) cylinder(h=10, r=1.7);
+    // Screw holes
+    translate([-15.5,-15.5,7]) cylinder(h=7, r=3.5);
+    translate([-15.5,+15.5,7]) cylinder(h=7, r=3.5);
+  }
+  translate([0,10,-1]) cylinder(h=12, r=4.5);
+  translate([0,30,-1]) cylinder(h=12, r=4.5);
 }
 
 // Final part
-module y_motor() {
- difference() {
-  y_motor_base();
-  y_motor_holes();
- }
+module y_motor()
+{
+  difference() {
+    y_motor_base();
+    y_motor_holes();
+  }
 }
 
 y_motor();

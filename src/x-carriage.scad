@@ -75,127 +75,127 @@ total_depth=carriage_block_depth + bearing_block_depth;
 x_carriage();
 
 module x_carriage() {
-    difference() {
-        main_block();
-        union() {
-            for (i=[1,-1]) for (j=[1,-1]) translate([i*bolt_x_centres / 2, j*bolt_y_centres / 2, -1]) cylinder(d=bolt_hole_dia, h=carriage_block_depth + bearing_block_depth + 2);
-            twin_bearing_cutouts();
-        }
+  difference() {
+    main_block();
+    union() {
+      for (i=[1,-1]) for (j=[1,-1]) translate([i*bolt_x_centres / 2, j*bolt_y_centres / 2, -1]) cylinder(d=bolt_hole_dia, h=carriage_block_depth + bearing_block_depth + 2);
+      twin_bearing_cutouts();
     }
+  }
 }
 
 module main_block()
 {
-    linear_extrude(carriage_block_depth)
-    hull() {
-        if (square_endstop) {
-            translate([carriage_width / 2 - carriage_corner_radius, carriage_height / 2 - carriage_corner_radius, 0])
-                square(size=[carriage_corner_radius, carriage_corner_radius]);
-        } else {
-            translate([carriage_width / 2 - carriage_corner_radius, carriage_height / 2 - carriage_corner_radius, 0])
-                circle(r=carriage_corner_radius);
-        }
-        translate([-carriage_width / 2 + carriage_corner_radius, carriage_height / 2 - carriage_corner_radius, 0])
-            circle(r=carriage_corner_radius);
-        translate([carriage_width / 2 - carriage_corner_radius, -carriage_height / 2 + carriage_corner_radius, 0])
-            circle(r=carriage_corner_radius);
-        translate([-carriage_width / 2 + carriage_corner_radius, -carriage_height / 2 + carriage_corner_radius, 0])
-            circle(r=carriage_corner_radius);
+  linear_extrude(carriage_block_depth)
+  hull() {
+    if (square_endstop) {
+      translate([carriage_width / 2 - carriage_corner_radius, carriage_height / 2 - carriage_corner_radius, 0])
+        square(size=[carriage_corner_radius, carriage_corner_radius]);
+    } else {
+      translate([carriage_width / 2 - carriage_corner_radius, carriage_height / 2 - carriage_corner_radius, 0])
+        circle(r=carriage_corner_radius);
     }
-    translate([0, -carriage_height / 2 + bearing_block_height / 2, carriage_block_depth])
-        bearing_block();
-    translate([0, carriage_height / 2 - bearing_block_height / 2, carriage_block_depth])
-        bearing_block();
-    translate([carriage_width / 2 - belt_clamp_width, -belt_clamp_height + 2.5, carriage_block_depth])
-        belt_clamp();
-
-    translate([-carriage_width / 2, -belt_clamp_height + 2.5, carriage_block_depth])
+    translate([-carriage_width / 2 + carriage_corner_radius, carriage_height / 2 - carriage_corner_radius, 0])
+      circle(r=carriage_corner_radius);
+    translate([carriage_width / 2 - carriage_corner_radius, -carriage_height / 2 + carriage_corner_radius, 0])
+      circle(r=carriage_corner_radius);
+    translate([-carriage_width / 2 + carriage_corner_radius, -carriage_height / 2 + carriage_corner_radius, 0])
+      circle(r=carriage_corner_radius);
+  }
+  translate([0, -carriage_height / 2 + bearing_block_height / 2, carriage_block_depth])
+    bearing_block();
+  translate([0, carriage_height / 2 - bearing_block_height / 2, carriage_block_depth])
+    bearing_block();
+  translate([carriage_width / 2 - belt_clamp_width, -belt_clamp_height + 2.5, carriage_block_depth])
     belt_clamp();
+
+  translate([-carriage_width / 2, -belt_clamp_height + 2.5, carriage_block_depth])
+  belt_clamp();
 }
 
 module bearing_block()
 {
-    linear_extrude(bearing_block_depth)
-    hull() {
-        translate([carriage_width / 2 - bearing_block_corner_radius, bearing_block_height / 2 - bearing_block_corner_radius, 0])
-            circle(r=bearing_block_corner_radius);
-        translate([-carriage_width / 2 + bearing_block_corner_radius, bearing_block_height / 2 - bearing_block_corner_radius, 0])
-            circle(r=bearing_block_corner_radius);
-        translate([carriage_width / 2 - bearing_block_corner_radius, -bearing_block_height / 2 + bearing_block_corner_radius, 0])
-            circle(r=bearing_block_corner_radius);
-        translate([-carriage_width / 2 + bearing_block_corner_radius, -bearing_block_height / 2 + bearing_block_corner_radius, 0])
-            circle(r=bearing_block_corner_radius);
-    }
+  linear_extrude(bearing_block_depth)
+  hull() {
+    translate([carriage_width / 2 - bearing_block_corner_radius, bearing_block_height / 2 - bearing_block_corner_radius, 0])
+      circle(r=bearing_block_corner_radius);
+    translate([-carriage_width / 2 + bearing_block_corner_radius, bearing_block_height / 2 - bearing_block_corner_radius, 0])
+      circle(r=bearing_block_corner_radius);
+    translate([carriage_width / 2 - bearing_block_corner_radius, -bearing_block_height / 2 + bearing_block_corner_radius, 0])
+      circle(r=bearing_block_corner_radius);
+    translate([-carriage_width / 2 + bearing_block_corner_radius, -bearing_block_height / 2 + bearing_block_corner_radius, 0])
+      circle(r=bearing_block_corner_radius);
+  }
 }
 
 module belt_clamp()
 {
-    points=[
-        [0, 0, 0],
-        [0, belt_clamp_height - belt_clamp_chamfer, 0],
-        [0, belt_clamp_height - belt_clamp_chamfer, belt_clamp_depth],
-        [0, belt_clamp_chamfer, belt_clamp_depth],
-        [0, 0, belt_clamp_depth - belt_clamp_chamfer],
-        [belt_clamp_chamfer, belt_clamp_height, belt_clamp_depth],
-        [belt_clamp_chamfer, belt_clamp_height, 0],
+  points=[
+    [0, 0, 0],
+    [0, belt_clamp_height - belt_clamp_chamfer, 0],
+    [0, belt_clamp_height - belt_clamp_chamfer, belt_clamp_depth],
+    [0, belt_clamp_chamfer, belt_clamp_depth],
+    [0, 0, belt_clamp_depth - belt_clamp_chamfer],
+    [belt_clamp_chamfer, belt_clamp_height, belt_clamp_depth],
+    [belt_clamp_chamfer, belt_clamp_height, 0],
 
-        [belt_clamp_width, 0, 0],
-        [belt_clamp_width, belt_clamp_height - belt_clamp_chamfer, 0],
-        [belt_clamp_width, belt_clamp_height - belt_clamp_chamfer, belt_clamp_depth],
-        [belt_clamp_width, belt_clamp_chamfer, belt_clamp_depth],
-        [belt_clamp_width, 0, belt_clamp_depth - belt_clamp_chamfer],
-        [belt_clamp_width - belt_clamp_chamfer, belt_clamp_height, belt_clamp_depth],
-        [belt_clamp_width - belt_clamp_chamfer, belt_clamp_height, 0],
+    [belt_clamp_width, 0, 0],
+    [belt_clamp_width, belt_clamp_height - belt_clamp_chamfer, 0],
+    [belt_clamp_width, belt_clamp_height - belt_clamp_chamfer, belt_clamp_depth],
+    [belt_clamp_width, belt_clamp_chamfer, belt_clamp_depth],
+    [belt_clamp_width, 0, belt_clamp_depth - belt_clamp_chamfer],
+    [belt_clamp_width - belt_clamp_chamfer, belt_clamp_height, belt_clamp_depth],
+    [belt_clamp_width - belt_clamp_chamfer, belt_clamp_height, 0],
 
-    ];
+  ];
 
-    faces=[
-        [0,1,2,3,4],
-        [1,6,5,2],
-        [7,11,10,9,8],
-        [8,9,12,13],
-        [6,13,12,5],
-        [5,12,9,10,3,2],
-        [3,10,11,4],
-        [0,4,11,7],
-        [0,7,8,13,6,1],
-    ];
+  faces=[
+    [0,1,2,3,4],
+    [1,6,5,2],
+    [7,11,10,9,8],
+    [8,9,12,13],
+    [6,13,12,5],
+    [5,12,9,10,3,2],
+    [3,10,11,4],
+    [0,4,11,7],
+    [0,7,8,13,6,1],
+  ];
 
-    difference() {
-        polyhedron(points=points, faces=faces);
-        belt_teeth();
-    }
+  difference() {
+    polyhedron(points=points, faces=faces);
+    belt_teeth();
+  }
 }
 
 module belt_teeth()
 {
-    for (i=[belt_tooth_diameter:belt_pitch:belt_clamp_width + belt_tooth_diameter]) {
-        translate([i, 0, 0]) cylinder(d=belt_tooth_diameter, h=belt_clamp_depth);
-    }
+  for (i=[belt_tooth_diameter:belt_pitch:belt_clamp_width + belt_tooth_diameter]) {
+    translate([i, 0, 0]) cylinder(d=belt_tooth_diameter, h=belt_clamp_depth);
+  }
 }
 
 module twin_bearing_cutouts()
 {
-    for (i=[-1, 1]) {
-        translate([-twin_bearing_length - twin_bearing_offset, i*axis_bar_centres/2, axis_bearing_z]) rotate([0,90,0]) cylinder(d=axis_bearing_dia, h=twin_bearing_length);
-        translate([-twin_bearing_offset - tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
-        translate([-twin_bearing_length - twin_bearing_offset + tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
+  for (i=[-1, 1]) {
+    translate([-twin_bearing_length - twin_bearing_offset, i*axis_bar_centres/2, axis_bearing_z]) rotate([0,90,0]) cylinder(d=axis_bearing_dia, h=twin_bearing_length);
+    translate([-twin_bearing_offset - tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
+    translate([-twin_bearing_length - twin_bearing_offset + tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
 
-        translate([twin_bearing_offset, i*axis_bar_centres/2, axis_bearing_z]) rotate([0,90,0]) cylinder(d=axis_bearing_dia, h=twin_bearing_length);
-        translate([twin_bearing_length + twin_bearing_offset - tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
-        translate([twin_bearing_offset + tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
+    translate([twin_bearing_offset, i*axis_bar_centres/2, axis_bearing_z]) rotate([0,90,0]) cylinder(d=axis_bearing_dia, h=twin_bearing_length);
+    translate([twin_bearing_length + twin_bearing_offset - tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
+    translate([twin_bearing_offset + tiewrap_width, i*axis_bar_centres/2, 0]) tiewrap_cutout();
 
-        translate([-(carriage_width / 2)-1, i*axis_bar_centres/2, axis_bearing_z]) rotate([0,90,0]) cylinder(d=axis_bearing_collar_dia, h=carriage_width+2);
-    }
+    translate([-(carriage_width / 2)-1, i*axis_bar_centres/2, axis_bearing_z]) rotate([0,90,0]) cylinder(d=axis_bearing_collar_dia, h=carriage_width+2);
+  }
 }
 
 module tiewrap_cutout()
 {
-    difference() {
-        translate([0,0,total_depth / 2]) cube([tiewrap_width, tiewrap_inner_height+tiewrap_depth*2, total_depth+2], center=true);
-        translate([1,0,tiewrap_bottom_offset]) rotate([0, -90, 0]) minkowski() {
-            translate([total_depth / 2 + tiewrap_radius, 0, -1]) cube([total_depth, tiewrap_inner_height - tiewrap_radius * 2, tiewrap_width - 2], center=true);
-            cylinder(r=tiewrap_radius, h=4);
-        }
+  difference() {
+    translate([0,0,total_depth / 2]) cube([tiewrap_width, tiewrap_inner_height+tiewrap_depth*2, total_depth+2], center=true);
+    translate([1,0,tiewrap_bottom_offset]) rotate([0, -90, 0]) minkowski() {
+      translate([total_depth / 2 + tiewrap_radius, 0, -1]) cube([total_depth, tiewrap_inner_height - tiewrap_radius * 2, tiewrap_width - 2], center=true);
+      cylinder(r=tiewrap_radius, h=4);
     }
+  }
 }

@@ -10,23 +10,23 @@ use <inc/leadscrew_bolt.scad>
 
 
 module y_axis_assembly() {
-    for (i=[0,1]) mirror([0,i,0]) translate([0,-(380/2)+26,0]) {
-        // 4x Threaded rod M8x210 mm
-        % translate([-210/2,-11,10]) rotate([0,90,0]) cylinder(d=8, h=210);
-        % translate([-210/2,-11,30]) rotate([0,90,0]) cylinder(d=8, h=210);
-        // y-corners
-        translate([+(210-30)/2,0,0]) y_corners();
-        translate([-(210-30)/2,0,0]) y_corners();
-    }
-    for (i=[-1,1]) {
-        // 2x Threaded rod M10x380 mm
-        % translate([i*(210-30)/2,380/2,20]) rotate([90,90,0]) cylinder(d=10, h=380);
-        // 2x Smooth rod Ø8x370 mm
-        % translate([i*(210-30)/2,370/2,45]) rotate([90,90,0]) cylinder(d=8, h=370);
-    }
+  for (i=[0,1]) mirror([0,i,0]) translate([0,-(380/2)+26,0]) {
+    // 4x Threaded rod M8x210 mm
+    % translate([-210/2,-11,10]) rotate([0,90,0]) cylinder(d=8, h=210);
+    % translate([-210/2,-11,30]) rotate([0,90,0]) cylinder(d=8, h=210);
+    // y-corners
+    translate([+(210-30)/2,0,0]) y_corners();
+    translate([-(210-30)/2,0,0]) y_corners();
+  }
+  for (i=[-1,1]) {
+    // 2x Threaded rod M10x380 mm
+    % translate([i*(210-30)/2,380/2,20]) rotate([90,90,0]) cylinder(d=10, h=380);
+    // 2x Smooth rod Ø8x370 mm
+    % translate([i*(210-30)/2,370/2,45]) rotate([90,90,0]) cylinder(d=8, h=370);
+  }
 
-    translate([0,-(380/2)+35,2]) rotate([0,0,180]) y_idler();
-    translate([11,+(380/2)-15,0]) rotate([90,0,0]) rotate([0,-90,0]) y_motor();
+  translate([0,-(380/2)+35,2]) rotate([0,0,180]) y_idler();
+  translate([11,+(380/2)-15,0]) rotate([90,0,0]) rotate([0,-90,0]) y_motor();
 }
 
 // y_axis_assembly();
