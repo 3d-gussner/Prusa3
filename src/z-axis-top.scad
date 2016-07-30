@@ -43,8 +43,9 @@ module z_top_holes()
 
   // Ball bearing
   translate([25+4.3,26.2,-1]) cylinder(h=10, d=13, $fn=20);
-  translate([25+4.3,26.2,2]) cylinder(h=10, d=22, $fn=30);
-  for (i=[-1,1]) translate([25+4.3-8.6*i,26.2+8.6*i,1]) cylinder(h=9, d=1.5, $fn=15);
+  translate([25+4.3,26.2,2]) cylinder(h=10, d=22.5, $fn=30);
+  translate([25+4.3-9.5, 26.2+9.5, -3]) cylinder(h=13, d=2, $fn=15);
+  translate([25+4.3+5.5, 26.2-12.5, -3]) cylinder(h=13, d=2, $fn=15);
 
   // Z rod holder
   translate([25+4.3,4.2,-1]) cylinder(h=10, r=4.1, $fn=15);
