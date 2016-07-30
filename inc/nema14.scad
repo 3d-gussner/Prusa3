@@ -1,11 +1,11 @@
 // Increase this if your slicer or printer make holes too tight.
-extra_radius = 0.1;
+extra_radius=0.1;
 
 // Major diameter of metric 3mm thread.
-m3_radius = 2.85/2 + extra_radius;
+m3_radius=2.85/2 + extra_radius;
 
 // Placement for the NEMA14 stepper motors.
-motor_length = 33.9;
+motor_length=33.9;
 
 module nema14() {
 
@@ -30,7 +30,7 @@ module nema14() {
     }
 
     // Holes for bolts
-    for (a = [0:90:359]) {
+    for (a=[0:90:359]) {
       rotate([0, 0, a]) translate([26/2, 26/2, 0])
         cylinder(r=m3_radius, h=10, center=true, $fn=12);
     }

@@ -19,46 +19,46 @@ $fs=0.5; // default minimum facet size is now 0.5 mm
 //////////////////////////////////////////////////////////////////////////////////////
 
 // power supply dimensions
-psw = 113.5;// width fo power supply
-psh = 49; // height of power supply
-psd = 19; // depth inside power supply
-psa = 2.0;// thickness of alu sheets
-psb = 9;  // thickness of ps bottom
+psw=113.5;// width fo power supply
+psh=49; // height of power supply
+psd=19; // depth inside power supply
+psa=2.0;// thickness of alu sheets
+psb=9;  // thickness of ps bottom
 
 // molex female plug dimensions
-mow = 15; // width of molex socket
-moh = 8.5; // height of molex socket
-moc = 1.5;   // extra height of clip
-mod = 18;  // depth of molex in case
-mox = 0;  // position of molex sockets
-mon = 3;   // number of molex slots
+mow=15; // width of molex socket
+moh=8.5; // height of molex socket
+moc=1.5;   // extra height of clip
+mod=18;  // depth of molex in case
+mox=0;  // position of molex sockets
+mon=3;   // number of molex slots
 
 // ac socket dimensions
-act = 50;  // total width of ac socket
-acw = 27;  // width of ac socket
-ach = 20;  // height of ac socket
-acs = 40;  // screw distance of ac socket
-acc = 8;   // corner length
+act=50;  // total width of ac socket
+acw=27;  // width of ac socket
+ach=20;  // height of ac socket
+acs=40;  // screw distance of ac socket
+acc=8;   // corner length
 
 // ac switch
-sww = 13.5;  // switch width
-swh = 9;   // switch height
+sww=13.5;  // switch width
+swh=9;   // switch height
 
 // lcd voltage display
-vdw = 23; // width
-vdh = 14.5; // height
-vdd = 6;  // depth
-vds = 28; // screw base
+vdw=23; // width
+vdh=14.5; // height
+vdd=6;  // depth
+vds=28; // screw base
 
 //
-exd = 21; // extruding depth behind power supply
-wall = 3; // wall thickness
-m4 = 4.2;  // screw diameter
-m3 = 3.2;  // screw diameter
+exd=21; // extruding depth behind power supply
+wall=3; // wall thickness
+m4=4.2;  // screw diameter
+m3=3.2;  // screw diameter
 
-module pscover(supports=true){
-  difference(){
-    union(){
+module pscover(supports=true) {
+  difference() {
+    union() {
       // man cover walls
       cube([psw,wall,psh]);
       cube([psw,exd,wall]);
@@ -82,17 +82,17 @@ module pscover(supports=true){
          translate([x+psw/4-vdw/2-(vds-vdw),0,psh-vdd])cube([vds-vdw,(exd+psd)/2+vdh/2,vdd]);
     }
       // molex cutouts
-      for(n=[0:mon-1]){
+      for(n=[0:mon-1]) {
         translate([2*wall+mox+n*(wall+mow),-1,psh-3*wall-ach/2-moh/2])cube([mow,mod+2,moh]);
         translate([2*wall+mox+n*(wall+mow)+mow/3,-1,psh-3*wall-ach/2+moh/2-1])cube([mow/3,mod+2,moc+1]);
         translate([2*wall+mox+n*(wall+mow)+mow/2-2,2*wall,psh-3*wall-ach/2-moh/2-1.5])cube([4,mod+2,moh+3]);
         translate([2*wall+mox+n*(wall+mow)+mow/2-2,2*wall,psh-3*wall-ach/2-moh/2-5])cube([4,5,moh+10]);
       }
       // ac socket cutout
-      translate([psw-wall-act/2,0,psh-1.5*wall-ach/2]){
+      translate([psw-wall-act/2,0,psh-1.5*wall-ach/2]) {
          for(x=[-acs/2,acs/2])translate([x,-1,0])rotate(-90,[1,0,0])cylinder(r=m3/2, wall+2);
          for(x=[-acs/2,acs/2])translate([x,wall,0])rotate(-90,[1,0,0])cylinder(r=5.5/2/cos(30), wall+2,$fn=6);
-   hull(){
+   hull() {
      translate([-acw/2,-1,-ach/2])cube([acw,wall+2,ach-acc/sqrt(2)]);
      translate([-acw/2+acc/sqrt(2),-1,+ach/2-0.1])cube([acw-sqrt(2)*acc,wall+2,0.1]);
    }
@@ -103,7 +103,7 @@ module pscover(supports=true){
 
       // ac switch cutout
       translate([psw/2,(exd+psd)/2-swh/2,psh-wall-1])cube([sww,swh,wall+2]);
-      hull(){
+      hull() {
           translate([psw/2-2,(exd+psd)/2-swh/2-2,psh-wall-0.1])cube([sww+4,swh+4,0.2]);
           translate([psw/2-1,(exd+psd)/2-swh/2-1,psh-wall/2])cube([sww+2,swh+2,0.1]);
       }
@@ -113,9 +113,9 @@ module pscover(supports=true){
       translate([psw/2,exd+6.5,psh/2])for(s=[-1,1])scale([s,1,1])translate([psw/2-wall-psa-2,0,0])rotate(90,[0,1,0])cylinder(r=5.5/2/cos(30),h=psa+1,$fn=6);
 
       //  anti-warping grooves
-      for(x = [8:20:psw-5]) translate([x,wall,wall/2])cube([1.5,exd-wall-2,wall]);
-      for(x = [8,50,85,105]) translate([x,wall,psh-wall-1])cube([1.5,exd+psd-wall-2,wall/2+1]);
-      for(x = [18:20:psw-5]) translate([x,wall/2,wall])cube([1.5,wall/2+1,psh-2*wall]);
+      for(x=[8:20:psw-5]) translate([x,wall,wall/2])cube([1.5,exd-wall-2,wall]);
+      for(x=[8,50,85,105]) translate([x,wall,psh-wall-1])cube([1.5,exd+psd-wall-2,wall/2+1]);
+      for(x=[18:20:psw-5]) translate([x,wall/2,wall])cube([1.5,wall/2+1,psh-2*wall]);
   }
 
   //  explicit bridge support for lcd display cutout (cut away after printing)

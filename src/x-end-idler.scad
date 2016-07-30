@@ -9,7 +9,7 @@ use <x-end.scad>
 
 module x_end_idler()
 {
-    mirror([0,1,0]) difference(){
+    mirror([0,1,0]) difference() {
         x_end_base();
         x_end_holes();
     }

@@ -32,25 +32,25 @@ module z_bottom_fancy()
 module z_bottom_holes()
 {
     // Frame mounting screw holes
-    translate([-1,10,10+5]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
-    translate([-1,10+20,10+5]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
-    translate([-1,10+10,10+20+5]) rotate([0,90,0]) cylinder(h = 20, r=1.8, $fn=30);
+    translate([-1,10,10+5]) rotate([0,90,0]) cylinder(h=20, r=1.8, $fn=30);
+    translate([-1,10+20,10+5]) rotate([0,90,0]) cylinder(h=20, r=1.8, $fn=30);
+    translate([-1,10+10,10+20+5]) rotate([0,90,0]) cylinder(h=20, r=1.8, $fn=30);
 
     // Frame mounting screw head holes
-    translate([4,10,10+5]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
-    translate([4,10+20,10+5]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
-    translate([4,10+10,10+20+5]) rotate([0,90,0]) cylinder(h = 20, r=3.1, $fn=30);
+    translate([4,10,10+5]) rotate([0,90,0]) cylinder(h=20, r=3.1, $fn=30);
+    translate([4,10+20,10+5]) rotate([0,90,0]) cylinder(h=20, r=3.1, $fn=30);
+    translate([4,10+10,10+20+5]) rotate([0,90,0]) cylinder(h=20, r=3.1, $fn=30);
     translate([4,10+10-3.1,10+20+5]) cube([10,6.2,10]);
 
     // Z rod holder
-    translate([25+4.3,4.2,-1]) rotate([0,0,0]) cylinder(h = 50, r=4.1, $fn=15);
+    translate([25+4.3,4.2,-1]) rotate([0,0,0]) cylinder(h=50, r=4.1, $fn=15);
     translate([25+4.3-1,3,0.6]) cube([2,10,7]); // it's bit up because it helps with printing
 
     // motor mounting
     translate([25+4.3,21,-1]) {
-        translate([15.5,-15.5,-1]) cylinder(h = 20, r=1.8, $fn=30);
-        translate([-15.5,15.5,-1]) cylinder(h = 20, r=1.8, $fn=30);
-        translate([-15.5,-15.5,-1]) cylinder(h = 20, r=1.8, $fn=30);
+        translate([15.5,-15.5,-1]) cylinder(h=20, r=1.8, $fn=30);
+        translate([-15.5,15.5,-1]) cylinder(h=20, r=1.8, $fn=30);
+        translate([-15.5,-15.5,-1]) cylinder(h=20, r=1.8, $fn=30);
     }
 }
 
