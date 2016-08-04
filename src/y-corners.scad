@@ -58,4 +58,4 @@ module y_corners()
   }
 }
 
-corner();
+y_corners();

@@ -5,14 +5,14 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-module belt_holder_base()
+module y_belt_holder_base()
 {
   translate([-33-8.5,0,-1]) cube([33,15,16]);
   translate([-33-8.5,11,-1]) cube([33,15,16]);
   translate([-50,22,-1]) cube([50,4,16]);
 }
 
-module belt_holder_beltcut()
+module y_belt_holder_beltcut()
 {
   position_tweak=-0.2;
   // Belt slit
@@ -27,20 +27,20 @@ module belt_holder_beltcut()
   translate([-2-25,-1,3]) cube([4,11,15]);
 }
 
-module belt_holder_holes()
+module y_belt_holder_holes()
 {
   translate([-4.5,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
   translate([-45.5,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
 }
 
 // Final part
-module belt_holder()
+module y_belt_holder()
 {
   difference() {
-    belt_holder_base();
-    belt_holder_beltcut();
-    belt_holder_holes();
+    y_belt_holder_base();
+    y_belt_holder_beltcut();
+    y_belt_holder_holes();
   }
 }
 
-belt_holder();
+y_belt_holder();
