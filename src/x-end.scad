@@ -6,7 +6,7 @@
 // http://prusamendel.org
 
 use <../inc/bearing.scad>
-use <polyholes.scad>
+use <../inc/polyholes.scad>
 rod_distance=45;
 
 module x_end_base()
