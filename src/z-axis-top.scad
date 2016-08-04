@@ -9,7 +9,7 @@ module z_top_base()
 {
   // plate touching the base
   translate([0, -5, 0]) {
-    cube([41, 45, 6.9]);
+    cube([42, 45, 6.9]);
     cube([8, 45, 16]);
     cube([30, 5.01, 12]);
   }
@@ -43,9 +43,9 @@ module z_top_holes()
 
   // Ball bearing
   translate([25+4.3,26.2,-1]) cylinder(h=10, d=13, $fn=20);
-  translate([25+4.3,26.2,2]) cylinder(h=10, d=22.5, $fn=30);
-  translate([25+4.3-9.5, 26.2+9.5, -3]) cylinder(h=13, d=2, $fn=15);
-  translate([25+4.3+5.5, 26.2-12.5, -3]) cylinder(h=13, d=2, $fn=15);
+  translate([25+4.3,26.2,1]) cylinder(h=10, d=22.5, $fn=30);
+  translate([25+4.3-9.5, 26.2+9.5, -3]) cylinder(h=13, d=2.5, $fn=15);
+  translate([25+4.3+5.5, 26.2-12.5, -3]) cylinder(h=13, d=2.5, $fn=15);
 
   // Z rod holder
   translate([25+4.3,4.2,-1]) cylinder(h=10, r=4.1, $fn=15);
@@ -63,9 +63,8 @@ module z_axis_top()
 // Final part
 module z_top()
 {
-  for (i=[0,1]) {
-    mirror([0,i,0]) translate([0,10,0]) z_axis_top();
-  }
+  translate([0,10,0]) z_axis_top();
+ // mirror([0,1,0]) translate([0,10,0]) z_axis_top();
 }
 
 z_top();
