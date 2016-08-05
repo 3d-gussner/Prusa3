@@ -72,18 +72,6 @@ geetech_pulley_offset=8;
 // Utility variable used to simplify some of the translations
 total_depth=carriage_block_depth + bearing_block_depth;
 
-x_carriage();
-
-module x_carriage() {
-  difference() {
-    main_block();
-    union() {
-      for (i=[1,-1]) for (j=[1,-1]) translate([i*bolt_x_centres / 2, j*bolt_y_centres / 2, -1]) cylinder(d=bolt_hole_dia, h=carriage_block_depth + bearing_block_depth + 2);
-      twin_bearing_cutouts();
-    }
-  }
-}
-
 module main_block()
 {
   linear_extrude(carriage_block_depth)
@@ -199,3 +187,16 @@ module tiewrap_cutout()
     }
   }
 }
+
+module x_carriage()
+{
+  difference() {
+    main_block();
+    union() {
+      for (i=[1,-1]) for (j=[1,-1]) translate([i*bolt_x_centres / 2, j*bolt_y_centres / 2, -1]) cylinder(d=bolt_hole_dia, h=carriage_block_depth + bearing_block_depth + 2);
+      twin_bearing_cutouts();
+    }
+  }
+}
+
+x_carriage();
