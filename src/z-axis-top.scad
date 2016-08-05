@@ -64,7 +64,7 @@ module z_axis_top()
 module z_top()
 {
   translate([0,10,0]) z_axis_top();
- // mirror([0,1,0]) translate([0,10,0]) z_axis_top();
+  mirror([0,1,0]) translate([0,10,0]) z_axis_top();
 }
 
 z_top();

@@ -60,7 +60,7 @@ module z_bottom_holes()
 module z_bottom_holder()
 {
   translate([0,8,0]) z_axis_bottom();
-  // mirror([0,1,0]) translate([0,8,0]) z_axis_bottom();
+  mirror([0,1,0]) translate([0,8,0]) z_axis_bottom();
 }
 
 module z_axis_bottom()
