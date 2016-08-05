@@ -1,0 +1,102 @@
+#!/usr/bin/env php
+<?php
+
+class ScadRenderer
+{
+    protected $cmd;
+
+    public function __construct($cmd)
+    {
+        $this->cmd = $cmd;
+    }
+
+    public function makeStl($scadFile, $stlFile)
+    {
+        if (!file_exists($scadFile)) {
+            throw new \Exception(sprintf('Could not find file: `%s`', $scadFile));
+        }
+
+        $cmd = sprintf('%s -o %s %s', $this->cmd, $stlFile, $scadFile);
+        system($cmd);
+    }
+
+    public function makeImage($scadFile, $pngFile)
+    {
+        if (!file_exists($scadFile)) {
+            throw new \Exception(sprintf('Could not find file: `%s`', $scadFile));
+        }
+
+        $cmd = sprintf('%s -o %s %s', $this->cmd, $pngFile, $scadFile);
+        system($cmd);
+    }
+}
+
+class Cache
+{
+    protected $cacheFile;
+    protected $memory = [];
+
+    public function __construct($cacheFile)
+    {
+        $this->cacheFile = $cacheFile;
+        $this->memory = $this->loadCacheFile($cacheFile);
+    }
+
+    protected function loadCacheFile($cacheFile)
+    {
+        if (!file_exists($cacheFile)) {
+            return [];
+        }
+
+        return json_decode(file_get_contents($cacheFile), true);
+    }
+
+    public function hasChanged($fn)
+    {
+        if (!isset($this->memory[$fn])) {
+            return true;
+        }
+
+        return md5_file($fn) != $this->memory[$fn];
+    }
+
+    public function store($fn)
+    {
+        $this->memory[$fn] = md5_file($fn);
+        file_put_contents($this->cacheFile, json_encode($this->memory, JSON_PRETTY_PRINT));
+    }
+}
+
+
+$skipFiles = [
+    'power-supply-terminal-cover',
+    'filament-holder',
+    'y-frame-orig',
+    'y-frame',
+
+];
+
+$o = new ScadRenderer('/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD');
+$c = new Cache(__DIR__ . '/.cache');
+
+$l = strlen(getcwd());
+foreach (glob(__DIR__ . '/src/*.scad') as $file) {
+    if (in_array(basename($file, '.scad'), $skipFiles)) {
+        continue;
+    }
+
+    $scadFile = substr($file, $l+1);
+    $stlFile = sprintf('distribution/%s.stl', basename($file, '.scad'));
+    $pngFile = sprintf('images/%s.png', basename($file, '.scad'));
+
+    if (!$c->hasChanged($scadFile) && file_exists($stlFile) && file_exists($pngFile)) {
+        continue;
+    }
+
+    print "== $scadFile\n";
+    $o->makeStl($scadFile, $stlFile);
+    $o->makeImage($scadFile, $pngFile);
+
+    // Save the hash to cache
+    $c->store($scadFile);
+}
