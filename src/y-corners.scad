@@ -5,12 +5,6 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-
-module corner_base()
-{
-  translate([-9,-11,0])cube([18,22,47]);
-}
-
 module corner_holes()
 {
   translate([-11,-11,0]) {
@@ -55,7 +49,7 @@ module y_corners()
 {
   // Rotate the part for better printing
   rotate([90,0,0]) translate([0,0,11]) rotate([-90,0,0]) difference() {
-    corner_base();
+    translate([-9,-11,0]) cube([18,22,47]);
     corner_holes();
     corner_fancy();
   }
