@@ -5,7 +5,7 @@ module hotend_platform()
       translate([0,0,-6.25]) cube([52,5,51.5], center=true);
       rotate([90,0,0]) {
         for (j=[0,1]) hull() for (i=[0,1]) {
-          translate([(i*10)+13,-((j*25.5)+3),-3.5]) cylinder(d=3, h=3, center=true);
+          translate([(i*10)+13,-((j*25.5)+3),-3.5]) cylinder(d=3, h=3, center=true, $fn=10);
         }
       }
       rotate([0,90,0]) {
@@ -20,29 +20,12 @@ module hotend_platform()
     rotate([90,0,0]) {
       cylinder(d1=22, d2=15, h=10, center=true, $fn=40);
       for(i=[-1,1]) translate([i*22,3.9,0]) {
-        cylinder(d=3, h=10, center=true);
-        translate([0,0,-5+3.3]) cylinder(d=6, h=5, center=true);
+        cylinder(d=3, h=10, center=true, $fn=10);
+        translate([0,0,-5+3.3]) cylinder(d=6, h=5, center=true, $fn=16);
       }
       # for (i=[0,1]) translate([18,-((i*25.5)+3),0]) cylinder(d=1, h=12, center=true);
     }
-    rotate([0,90,0]) translate([-14,5,-24.5]) cylinder(d=3, h=10, center=true);
-  }
-}
-
-module hotend_stand()
-{
-  difference() {
-    hull() {
-      translate([0,1,0]) hull() {
-        cube([6,1,5], center=true);
-        translate([0,4+40,0]) cylinder(d=9, h=5, center=true);
-      }
-      hull() {
-        translate([0-24,1,0]) cube([6,1,5], center=true);
-        translate([0,1+4+40,0]) cylinder(d=6, h=5, center=true);
-      }
-    }
-    translate([0,5+40,0]) cylinder(d=3, h=10, center=true, $fn=8);
+    #rotate([0,90,0]) translate([-14,5,-24.5]) cylinder(d=3, h=10, center=true, $fn=10);
   }
 }
 
@@ -54,4 +37,3 @@ rotate([90,0,0]) {
   // }
   hotend_platform();
 }
-// hotend_stand();
