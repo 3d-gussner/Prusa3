@@ -10,24 +10,51 @@ class ScadRenderer
         $this->cmd = $cmd;
     }
 
-    public function makeStl($scadFile, $stlFile)
+    public function exportFile($scadFile, $dstFile)
     {
         if (!file_exists($scadFile)) {
             throw new \Exception(sprintf('Could not find file: `%s`', $scadFile));
         }
 
-        $cmd = sprintf('%s -o %s %s', $this->cmd, $stlFile, $scadFile);
+        $cmd = sprintf('%s -o %s %s', $this->cmd, $dstFile, $scadFile);
         system($cmd);
     }
 
-    public function makeImage($scadFile, $pngFile)
+    public function isFile2D($fn)
     {
-        if (!file_exists($scadFile)) {
-            throw new \Exception(sprintf('Could not find file: `%s`', $scadFile));
+        if (!file_exists($fn)) {
+            throw new \Exception(sprintf('Could not find file: `%s`', $fn));
         }
 
-        $cmd = sprintf('%s -o %s %s', $this->cmd, $pngFile, $scadFile);
-        system($cmd);
+        $c = file_get_contents($fn);
+
+        $c2d = 0;
+        foreach (['circle', 'square', 'polygon', 'text'] as $s) {
+            if (stripos($c, $s . '(') !== false || stripos($c, $s . '(') !== false) {
+                $c2d++;
+            }
+        }
+
+        $c3d = 0;
+        foreach (['sphere', 'cube', 'cylinder', 'polyhedron'] as $s) {
+            if (stripos($c, $s . '(') !== false || stripos($c, $s . '(') !== false) {
+                $c3d++;
+            }
+        }
+
+        if (preg_match_all('/(translate|rotate|scale|resize|mirror)\W?\(\[([0-9.\-,]+)\]/', $c, $m)) {
+            foreach ($m[2] as $v) {
+                $i = substr_count($v, ',');
+                if ($i === 1) {
+                    $c2d += $i;
+                }
+                if ($i === 2) {
+                    $c3d += $i;
+                }
+            }
+        }
+
+        return $c2d != 0 && $c2d >= $c3d;
     }
 }
 
@@ -70,10 +97,6 @@ class Cache
 
 $skipFiles = [
     'power-supply-terminal-cover',
-    'filament-holder',
-    'y-frame-orig',
-    'y-frame',
-
 ];
 
 $o = new ScadRenderer('/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD');
@@ -86,16 +109,20 @@ foreach (glob(__DIR__ . '/src/*.scad') as $file) {
     }
 
     $scadFile = substr($file, $l+1);
-    $stlFile = sprintf('distribution/%s.stl', basename($file, '.scad'));
+    $dstFile = sprintf('distribution/%s.stl', basename($file, '.scad'));
+    if ($o->isFile2D($scadFile)) {
+        $dstFile = sprintf('distribution/%s.dxf', basename($file, '.scad'));
+    }
+    print "== Building $scadFile -> $dstFile\n";
+
     $pngFile = sprintf('images/%s.png', basename($file, '.scad'));
 
-    if (!$c->hasChanged($scadFile) && file_exists($stlFile) && file_exists($pngFile)) {
+    if (!$c->hasChanged($scadFile) && file_exists($dstFile) && file_exists($pngFile)) {
         continue;
     }
 
-    print "== $scadFile\n";
-    $o->makeStl($scadFile, $stlFile);
-    $o->makeImage($scadFile, $pngFile);
+    $o->exportFile($scadFile, $dstFile);
+    $o->exportFile($scadFile, $pngFile);
 
     // Save the hash to cache
     $c->store($scadFile);
