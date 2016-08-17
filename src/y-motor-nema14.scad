@@ -45,7 +45,7 @@ module y_motor()
     y_motor_holes();
     translate([26.5,26.5,-2]) cylinder(d=26, h=14);
   }
+  % translate([26.5,26.5,0]) import("../inc/nema14.stl", convexity=3);
 }
 
-% translate([26.5,26.5,0]) import("../inc/nema14.stl", convexity=3);
 y_motor();

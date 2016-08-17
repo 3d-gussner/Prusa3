@@ -55,3 +55,4 @@ module x_end_motor()
   }
 }
 x_end_motor();
+% translate([-40.3,32,30.25]) rotate([0,90,0]) import("../inc/nema17.stl", convexity=3);

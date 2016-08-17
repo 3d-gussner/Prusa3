@@ -44,6 +44,7 @@ module y_motor()
     y_motor_base();
     y_motor_holes();
   }
+  % translate([29,29,-16.8]) import("../inc/nema17.stl", convexity=3);
 }
 
 y_motor();
