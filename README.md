@@ -6,4 +6,4 @@ This collection of models is not an attempt to make the ultimate printer once an
 
 ## Models
 
-A list of models can be found [here](images/overview.md)
+A list of models can be found [here](models.md)
