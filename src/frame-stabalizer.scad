@@ -1,3 +1,5 @@
+// Camera: 82,185,0,0,0,0,1066
+
 module alu_frame_stabalizer_grove(size=[0,0])
 {
   translate([size[0], 30]) {

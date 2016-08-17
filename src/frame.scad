@@ -1,3 +1,5 @@
+// Camera: 181,187,-293,0,0,0,1300
+
 module alu_frame_inner_cutout(outer_size=[0,0])
 {
   inner_size=[260, 290];
