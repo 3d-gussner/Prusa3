@@ -25,10 +25,10 @@
 
 [OpenSCAD file](./src/filament-holder.scad) | [STL file](./distribution/filament-holder.stl)
 
-## frame-stabalizer (frame-stabalizer.scad)
-![frame-stabalizer (frame-stabalizer.scad)](./images/frame-stabalizer.png "frame-stabalizer")
+## frame-stabilizer (frame-stabilizer.scad)
+![frame-stabilizer (frame-stabilizer.scad)](./images/frame-stabilizer.png "frame-stabilizer")
 
-[OpenSCAD file](./src/frame-stabalizer.scad) | [STL file](./distribution/frame-stabalizer.stl)
+[OpenSCAD file](./src/frame-stabilizer.scad) | [STL file](./distribution/frame-stabilizer.stl)
 
 ## frame (frame.scad)
 ![frame (frame.scad)](./images/frame.png "frame")
