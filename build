@@ -24,6 +24,7 @@ class ScadRenderer
         }
 
         $cmd = $this->cmd . ' ' . implode(' ', $paramsCmd) . ' ' . $scadFile;
+        print $cmd . "\n";
         system($cmd);
     }
 
@@ -120,6 +121,20 @@ class Cache
     }
 }
 
+function write_overview_file($file, $images)
+{
+    $lines = ['# Files', ''];
+    foreach ($images as $img) {
+        if (empty($img['desc'])) {
+            $img['desc'] = $img['name'];
+        }
+
+        $lines[] = sprintf('![%s (%s.scad)](%s "%s")', $img['desc'], basename($img['fn'], '.png'), $img['fn'], $img['name']);
+    }
+
+    file_put_contents($file, implode("\n", $lines) . "\n");
+}
+
 
 $o = new ScadRenderer('/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD');
 $c = new Cache(__DIR__ . '/.cache');
@@ -143,10 +158,35 @@ foreach (glob(__DIR__ . '/src/*.scad') as $file) {
         continue;
     }
 
-    $p = $o->getParams($scadFile);
+    // STL files
     $o->exportFile($scadFile, $dstFile);
-    $o->exportFile($scadFile, $pngFile, array_intersect_key($p, array_flip(['camera'])));
+
+    // Images
+    $p = $o->getParams($scadFile);
+    $p['imgsize'] = '120,120';
+    $o->exportFile($scadFile, $pngFile, array_intersect_key($p, array_flip(['camera','imgsize'])));
 
     // Save the hash to cache
     $c->store($scadFile);
 }
+
+$images = [];
+foreach (glob(__DIR__ . '/images/*.png') as $file) {
+    $name = $fn = basename($file, '.png');
+    $desc = '';
+    $scadFile = __DIR__ . '/src/' . $fn . '.scad';
+    if (file_exists($scadFile)) {
+        $p = $o->getParams($scadFile);
+        if (isset($p['name'])) {
+            $name = $p['name'];
+        }
+        if (isset($p['desc'])) {
+            $desc = $p['desc'];
+        }
+    }
+
+    $fn = basename($file);
+    $images[] = compact('fn', 'name', 'desc');
+}
+
+write_overview_file(__DIR__ . '/images/overview.md', $images);
