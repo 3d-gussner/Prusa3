@@ -130,6 +130,7 @@ function write_overview_file($file, $images)
         $lines[] = sprintf('## %s (%s.scad)', $img['name'], $basename);
         if (!empty($img['desc'])) {
             $lines[] = sprintf('%s', $img['desc']);
+            $lines[] = '';
         }
         $lines[] = sprintf('![%s (%s.scad)](./images/%s "%s")', $img['name'], $basename, $img['fn'], (empty($img['desc']) ? $img['name'] : $img['desc']));
         $lines[] = '';
