@@ -116,6 +116,7 @@
 [OpenSCAD file](./src/z-axis-top.scad) | [STL file](./distribution/z-axis-top.stl)
 
 ## Z Endstop Holder (z-endstop-holder.scad)
-![Z Endstop Holder (z-endstop-holder.scad)](./images/z-endstop-holder.png "Z Endstop Holder")
+Sits on the z-axis-bottom and holds an Opto Endstop Switch
+![Z Endstop Holder (z-endstop-holder.scad)](./images/z-endstop-holder.png "Sits on the z-axis-bottom and holds an Opto Endstop Switch")
 
 [OpenSCAD file](./src/z-endstop-holder.scad) | [STL file](./distribution/z-endstop-holder.stl)

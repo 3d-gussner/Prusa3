@@ -1,5 +1,6 @@
 // Camera: 28,7,6,68,0,206,188
 // Name: Z Endstop Holder
+// Desc: Sits on the z-axis-bottom and holds an Opto Endstop Switch
 
 module z_endstop_holder()
 {
@@ -20,9 +21,9 @@ module z_endstop_holder()
 
 z_endstop_holder();
 
-// use <../inc/opto-endstop.scad>
-// # translate ([12,-11,9]) mirror([0,1,0]) opto_endstop();
+use <../inc/opto-endstop.scad>
+% translate ([12,-11,9]) mirror([0,1,0]) opto_endstop();
 
-use <z-axis-bottom-nema14.scad>
+use <z-axis-bottom.scad>
 % mirror([0,0,1]) z_axis_bottom();
 % translate([29.3,4.2,-10]) cylinder(d=8, h=60, $fn=20);

@@ -4,7 +4,7 @@ use <src/y-idler.scad>
 
 use <src/x-end-idler.scad>
 use <src/x-end-motor-nema14.scad>
-use <src/z-axis-bottom-nema14.scad>
+use <src/z-axis-bottom.scad>
 use <src/z-axis-top.scad>
 use <inc/leadscrew_bolt.scad>
 
