@@ -131,8 +131,8 @@ function write_overview_file($file, $images)
         if (!empty($img['desc'])) {
             $lines[] = sprintf('%s', $img['desc']);
         }
-        $lines[] = sprintf('![%s (%s.scad)](./images/%s "%s")', $img['name'], $basename, $img['fn'], (empty($img['desc']) ? $img['name'] : $img['desc']));
         $lines[] = sprintf('[OpenSCAD file](./src/%s.scad) | [STL file](./distribution/%s.stl)', $basename, $basename);
+        $lines[] = sprintf('![%s (%s.scad)](./images/%s "%s")', $img['name'], $basename, $img['fn'], (empty($img['desc']) ? $img['name'] : $img['desc']));
         $lines[] = '';
     }
 
