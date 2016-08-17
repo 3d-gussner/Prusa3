@@ -1,3 +1,5 @@
+// Camera: 0,0,0,0,0,0,600
+
 module filament_holder()
 {
   width=10;
