@@ -1,3 +1,4 @@
+// Camera: 0,0,0,0,0,0,600
 $fa=0.5; // default minimum facet angle is now 0.5
 $fs=0.5; // default minimum facet size is now 0.5 mm
 
@@ -29,3 +30,4 @@ module y_frame_orig()
 }
 
 y_frame_orig();
+

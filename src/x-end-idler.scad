@@ -4,6 +4,7 @@
 // Josef Průša <iam@josefprusa.cz> and contributors
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
+// Camera: -14,-5,33,247,0,323,231
 
 use <../inc/x-end.scad>
 

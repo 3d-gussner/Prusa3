@@ -1,3 +1,5 @@
+// Camera: 2,-4,8,38,0,238,170
+
 module round_box(size=[1,1,1], d=0.1, center=false)
 {
   minkowski() {
