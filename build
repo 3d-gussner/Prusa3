@@ -166,7 +166,7 @@ foreach (glob(__DIR__ . '/src/*.scad') as $file) {
 
     // Images
     $p = $o->getParams($scadFile);
-    $p['imgsize'] = '120,120';
+    $p['imgsize'] = '200,200';
     $o->exportFile($scadFile, $pngFile, array_intersect_key($p, array_flip(['camera','imgsize'])));
 
     // Save the hash to cache
