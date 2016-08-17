@@ -10,14 +10,40 @@ class ScadRenderer
         $this->cmd = $cmd;
     }
 
-    public function exportFile($scadFile, $dstFile)
+    public function exportFile($scadFile, $dstFile, $params = [])
     {
         if (!file_exists($scadFile)) {
             throw new \Exception(sprintf('Could not find file: `%s`', $scadFile));
         }
 
-        $cmd = sprintf('%s -o %s %s', $this->cmd, $dstFile, $scadFile);
+        $paramsCmd = ['-o ' . $dstFile];
+        if (!empty($params)) {
+            foreach ($params as $k => $v) {
+                $paramsCmd[] = sprintf('--%s=%s', $k, $v);
+            }
+        }
+
+        $cmd = $this->cmd . ' ' . implode(' ', $paramsCmd) . ' ' . $scadFile;
         system($cmd);
+    }
+
+    public function getParams($fn)
+    {
+        if (!file_exists($fn)) {
+            throw new \Exception(sprintf('Could not find file: `%s`', $fn));
+        }
+
+        $r = [];
+        $c = file_get_contents($fn);
+        foreach (explode("\n", $c) as $line) {
+            if (!preg_match('/([A-Za-z].+):\W(.*)$/', $line, $m)) {
+                continue;
+            }
+
+            $r[strtolower($m[1])] = trim($m[2]);
+        }
+
+        return $r;
     }
 
     public function isFile2D($fn)
@@ -95,16 +121,12 @@ class Cache
 }
 
 
-$skipFiles = [
-    'power-supply-terminal-cover',
-];
-
 $o = new ScadRenderer('/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD');
 $c = new Cache(__DIR__ . '/.cache');
 
 $l = strlen(getcwd());
 foreach (glob(__DIR__ . '/src/*.scad') as $file) {
-    if (in_array(basename($file, '.scad'), $skipFiles)) {
+    if (in_array(basename($file, '.scad'), ['power-supply-terminal-cover'])) {
         continue;
     }
 
@@ -121,8 +143,9 @@ foreach (glob(__DIR__ . '/src/*.scad') as $file) {
         continue;
     }
 
+    $p = $o->getParams($scadFile);
     $o->exportFile($scadFile, $dstFile);
-    $o->exportFile($scadFile, $pngFile);
+    $o->exportFile($scadFile, $pngFile, array_intersect_key($p, array_flip(['camera'])));
 
     // Save the hash to cache
     $c->store($scadFile);
