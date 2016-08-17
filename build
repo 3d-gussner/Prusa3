@@ -125,14 +125,17 @@ function write_overview_file($file, $images)
 {
     $lines = ['# Files', ''];
     foreach ($images as $img) {
-        if (empty($img['desc'])) {
-            $img['desc'] = $img['name'];
-        }
+        $scadFile = basename($img['fn'], '.png');
 
-        $lines[] = sprintf('![%s (%s.scad)](%s "%s")', $img['desc'], basename($img['fn'], '.png'), $img['fn'], $img['name']);
+        $lines[] = sprintf('## %s (%s.scad)', $img['name'], $scadFile);
+        if (!empty($img['desc'])) {
+            $lines[] = sprintf('%s', $img['desc']);
+        }
+        $lines[] = sprintf('![%s (%s.scad)](%s "%s")', $img['name'], $scadFile, $img['fn'], (empty($img['desc']) ? $img['name'] : $img['desc']));
+        $lines[] = '';
     }
 
-    file_put_contents($file, implode("\n", $lines) . "\n");
+    file_put_contents($file, trim(implode("\n", $lines)) . "\n");
 }
 
 
@@ -175,14 +178,16 @@ foreach (glob(__DIR__ . '/images/*.png') as $file) {
     $name = $fn = basename($file, '.png');
     $desc = '';
     $scadFile = __DIR__ . '/src/' . $fn . '.scad';
-    if (file_exists($scadFile)) {
-        $p = $o->getParams($scadFile);
-        if (isset($p['name'])) {
-            $name = $p['name'];
-        }
-        if (isset($p['desc'])) {
-            $desc = $p['desc'];
-        }
+    if (!file_exists($scadFile)) {
+        continue;
+    }
+
+    $p = $o->getParams($scadFile);
+    if (isset($p['name'])) {
+        $name = $p['name'];
+    }
+    if (isset($p['desc'])) {
+        $desc = $p['desc'];
     }
 
     $fn = basename($file);
