@@ -4,6 +4,7 @@
 // Josef Průša <iam@josefprusa.cz> and contributors
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
+// Camera: 5,-5,-3,56,0,115,317
 
 module z_top_base()
 {
