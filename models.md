@@ -80,11 +80,6 @@
 
 [OpenSCAD file](./src/y-frame-mounts.scad) | [STL file](./distribution/y-frame-mounts.stl)
 
-## y-frame-orig (y-frame-orig.scad)
-![y-frame-orig (y-frame-orig.scad)](./images/y-frame-orig.png "y-frame-orig")
-
-[OpenSCAD file](./src/y-frame-orig.scad) | [STL file](./distribution/y-frame-orig.stl)
-
 ## y-frame (y-frame.scad)
 ![y-frame (y-frame.scad)](./images/y-frame.png "y-frame")
 
