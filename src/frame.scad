@@ -1,9 +1,9 @@
 // Camera: 181,187,-293,0,0,0,1300
 
-module alu_frame_inner_cutout(outer_size=[0,0])
+module frame_inner_cutout(outer_size=[0,0])
 {
   inner_size=[260, 290];
-  translate((outer_size-inner_size+[0,0])/2) alu_frame_square(inner_size);
+  translate((outer_size-inner_size+[0,0])/2) frame_square(inner_size);
 
   translate([outer_size[0]/2,50]) {
     for (i=[-1,1]) translate([i*85,0]) {
@@ -22,7 +22,7 @@ module alu_frame_inner_cutout(outer_size=[0,0])
   }
 }
 
-module alu_frame_stabalizer_mount_holes(size=[0,0])
+module frame_stabalizer_mount_holes(size=[0,0])
 {
   translate([(size[0]/2),0]) for (i=[0,1]) mirror([i,0]) translate([(size[0]/2)-44.6,0]) {
     for (i=[0,1]) translate([0,(size[1]/2)+(i*((size[1]/2)-30))]) {
@@ -37,7 +37,7 @@ module alu_frame_stabalizer_mount_holes(size=[0,0])
   }
 }
 
-module alu_frame_rod_mount_holes(size=[0,0])
+module frame_rod_mount_holes(size=[0,0])
 {
   translate([(size[0]/2),(size[1]/2)+15]) for (i=[0,1]) mirror([0,i]) for (i=[0,1]) mirror([i,0]) translate([(size[0]/2)-20,-(size[1]/2)+5]) {
     for (i=[-1,1]) translate([i*10,20]) circle(d=4, center=true, $fn=20);
@@ -46,7 +46,7 @@ module alu_frame_rod_mount_holes(size=[0,0])
   }
 }
 
-module alu_frame_square(size=[0,0], p=7)
+module frame_square(size=[0,0], p=7)
 {
   h = sqrt(pow(p,2)+pow(p,2));
   difference() {
@@ -55,20 +55,20 @@ module alu_frame_square(size=[0,0], p=7)
   }
 }
 
-module alu_frame()
+module frame()
 {
   size = [376.5, 370];
   difference() {
-    alu_frame_square(size);
-    alu_frame_inner_cutout(size);
+    frame_square(size);
+    frame_inner_cutout(size);
 
     // Bottom cutout
-    translate([(size[0]-300)/2,-10+3]) alu_frame_square([300,10]);
+    translate([(size[0]-300)/2,-10+3]) frame_square([300,10]);
 
     // Mount holes
-    alu_frame_stabalizer_mount_holes(size);
-    alu_frame_rod_mount_holes(size);
+    frame_stabalizer_mount_holes(size);
+    frame_rod_mount_holes(size);
   }
 }
 
-alu_frame();
+frame();

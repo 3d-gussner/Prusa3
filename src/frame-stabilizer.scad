@@ -1,6 +1,6 @@
 // Camera: 82,185,0,0,0,0,1066
 
-module alu_frame_stabalizer_grove(size=[0,0])
+module frame_stabalizer_grove(size=[0,0])
 {
   translate([size[0], 30]) {
     hull() {
@@ -11,14 +11,14 @@ module alu_frame_stabalizer_grove(size=[0,0])
   }
 }
 
-module alu_frame_stabalizer_mount_cutout()
+module frame_stabalizer_mount_cutout()
 {
   square([30.5,4.4]);
   translate([21.35,-1.8]) square([5.12,8]);
   translate([0,2.2-(23.6/2)]) square([9.4,23.6]);
 }
 
-module alu_frame_square(size=[0,0], p=7)
+module frame_square(size=[0,0], p=7)
 {
   h = sqrt(pow(p,2)+pow(p,2));
   difference() {
@@ -27,20 +27,20 @@ module alu_frame_square(size=[0,0], p=7)
   }
 }
 
-module alu_frame_stabalizer()
+module frame_stabalizer()
 {
   size = [187, 370];
   difference() {
     difference() {
-      alu_frame_square(size);
+      frame_square(size);
       translate([225,-33]) rotate(a=25.3) square(size+[0,100]);
     }
-    alu_frame_stabalizer_grove(size);
+    frame_stabalizer_grove(size);
 
     // Bottom cutout
-    translate([0,-10+3]) alu_frame_square([size[0]-26,10]);
+    translate([0,-10+3]) frame_square([size[0]-26,10]);
 
-    for (i=[22.8,182.8,337.8]) translate([0,i]) alu_frame_stabalizer_mount_cutout();
+    for (i=[22.8,182.8,337.8]) translate([0,i]) frame_stabalizer_mount_cutout();
     square([9.4,20]);
     translate([0,45.5]) square([9.4,118.95]);
     translate([0,205.6]) square([9.4,114]);
@@ -49,4 +49,4 @@ module alu_frame_stabalizer()
   }
 }
 
-alu_frame_stabalizer();
+frame_stabalizer();
