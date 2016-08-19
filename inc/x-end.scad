@@ -24,7 +24,7 @@ module x_end_base()
       // Hexagon
       cylinder(h=10.2, d=27, $fn=24);
       // Nut trap
-      translate([0, 0, -0.5]) poly_cylinder(h=16, r=5.1, $fn=25);
+      translate([0, 0, -0.5]) poly_cylinder(h=16, r=5.3, $fn=25);
       for (a=[0:90:269]) {
           rotate([0,0,a-90]) translate([(22/2)-(3.5/2)-1.2,0,-6]) cylinder(d=3.5, h=20, $fn=16);
       }
