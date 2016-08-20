@@ -22,9 +22,9 @@ module tensioner_arm(length)
     difference() {
       union() {
         for (i=[0,1]) mirror([i,0,0]) {
-          translate([3.4,length-5,0]) rotate([0,90,0]) cylinder(d=10, h=2, center=true, $fn=30);
-          // translate([3.4-0.8,length-5,0]) rotate([0,90,0]) cylinder(d1=5, d2=10, h=1, center=true);
+          translate([3.4,length-5,0]) rotate([0,90,0]) cylinder(d=10, h=4, center=true, $fn=30);
           translate([3.4,(length-5)/2,0]) cube([2,length-5,10], center=true);
+          translate([4.4,(length-10),0]) cube([2,10,10], center=true);
         }
 
         translate([0,8/2,8.8/2]) cube([8.8,8,10+8.8], center=true);
@@ -33,14 +33,14 @@ module tensioner_arm(length)
 
       #for (i=[0,1]) translate([0,10,i*8]) rotate([90,0,0]) cylinder(d=3.2, h=20, $fn=10);
       translate([0,length-5,0]) rotate([0,90,0]) cylinder(d=3.3, h=15, center=true, $fn=10);
-      translate([0,4,-5/2]) cube([5.5, 2, 5+5.5], center=true);
+      translate([0,4,-5/2]) cube([5.8, 2, 5+5.8], center=true);
       for (i=[0,1]) mirror([i,0,0]) translate([9.2/2,4,27.7/2]) rotate([0,45,0]) cube([6,10,4.2], center=true);
       translate([0,length-5,0]) rotate([0,90,0]) {
         difference() {
-          cylinder(d=10+4, h=6.5, center=true, $fn=30);
-          cylinder(d=10-3, h=6.5, center=true, $fn=30);
+          cylinder(d=10+8, h=6.9, center=true, $fn=30);
+          cylinder(d=10-3, h=6.9, center=true, $fn=30);
         }
-        cylinder(d=10+4, h=5.3, center=true, $fn=30);
+        cylinder(d=10+4, h=5.4, center=true, $fn=30);
       }
     }
 
@@ -65,5 +65,5 @@ module tensioner_plate()
   }
 }
 
-translate([0,-10,0]) tensioner_arm(length=50);
+translate([0,-10,0]) tensioner_arm(length=55);
 translate([0,10,0]) tensioner_plate();
