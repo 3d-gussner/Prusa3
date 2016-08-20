@@ -42,13 +42,13 @@ module x_end_holes()
     // Stress relief
     translate([-5.5-10+1.5, -10-1, 30]) cube([20,1,28], center=true);
     difference() {
-      translate([-5.5-10+1.5, -10, 30]) cube([10,46,28], center=true);
+      translate([-5.5-10+1.5, -5, 30]) cube([10,56,28], center=true);
 
       // Nice edges
-      translate([-5.5-10+1.5, -10, 30+23]) rotate([0, +45, 0]) cube([10, 46, 28], center=true);
-      translate([-5.5-10+1.5, -10, 30+23]) rotate([0, -45, 0]) cube([10, 46, 28], center=true);
-      translate([-5.5-10+1.5, -10, 30-23]) rotate([0, +45, 0]) cube([10, 46, 28], center=true);
-      translate([-5.5-10+1.5, -10, 30-23]) rotate([0, -45, 0]) cube([10, 46, 28], center=true);
+      translate([-5.5-10+1.5, -5, 30+23]) rotate([0, +45, 0]) cube([10, 56, 28], center=true);
+      translate([-5.5-10+1.5, -5, 30+23]) rotate([0, -45, 0]) cube([10, 56, 28], center=true);
+      translate([-5.5-10+1.5, -5, 30-23]) rotate([0, +45, 0]) cube([10, 56, 28], center=true);
+      translate([-5.5-10+1.5, -5, 30-23]) rotate([0, -45, 0]) cube([10, 56, 28], center=true);
     }
   }
 
