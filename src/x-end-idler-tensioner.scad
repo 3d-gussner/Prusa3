@@ -33,7 +33,7 @@ module tensioner_arm(length)
 
       #for (i=[0,1]) translate([0,10,i*8]) rotate([90,0,0]) cylinder(d=3.2, h=20, $fn=10);
       translate([0,length-5,0]) rotate([0,90,0]) cylinder(d=3.3, h=15, center=true, $fn=10);
-      translate([0,4,-5/2]) cube([5.8, 2, 5+5.8], center=true);
+      translate([0,4,-5/2]) cube([6, 2.1, 5+6], center=true);
       for (i=[0,1]) mirror([i,0,0]) translate([9.2/2,4,27.7/2]) rotate([0,45,0]) cube([6,10,4.2], center=true);
       translate([0,length-5,0]) rotate([0,90,0]) {
         difference() {
