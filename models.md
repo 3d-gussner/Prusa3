@@ -55,15 +55,10 @@
 
 [OpenSCAD file](./src/x-end-idler.scad) | [STL file](./distribution/x-end-idler.stl)
 
-## x-end-motor-nema14 (x-end-motor-nema14.scad)
-![x-end-motor-nema14 (x-end-motor-nema14.scad)](./images/x-end-motor-nema14.png "x-end-motor-nema14")
+## x-end-motor (x-end-motor.scad)
+![x-end-motor (x-end-motor.scad)](./images/x-end-motor.png "x-end-motor")
 
-[OpenSCAD file](./src/x-end-motor-nema14.scad) | [STL file](./distribution/x-end-motor-nema14.stl)
-
-## x-end-motor-nema17 (x-end-motor-nema17.scad)
-![x-end-motor-nema17 (x-end-motor-nema17.scad)](./images/x-end-motor-nema17.png "x-end-motor-nema17")
-
-[OpenSCAD file](./src/x-end-motor-nema17.scad) | [STL file](./distribution/x-end-motor-nema17.stl)
+[OpenSCAD file](./src/x-end-motor.scad) | [STL file](./distribution/x-end-motor.stl)
 
 ## y-belt-holder (y-belt-holder.scad)
 ![y-belt-holder (y-belt-holder.scad)](./images/y-belt-holder.png "y-belt-holder")

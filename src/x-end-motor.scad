@@ -19,8 +19,8 @@ module x_end_motor_holes()
 
     // Motor mounting holes
     for (i=[-1,1]) for (j=[-1,1]) {
-      translate([20,i*13,j*13]) rotate([0,-90,0]) rotate([0,0,90]) cylinder(h=70, r=1.8, $fn=30);
-      translate([1,i*13,j*13]) rotate([0,-90,0]) rotate([0,0,90]) cylinder(h=10, r=3.1, $fn=30);
+      hull() for (k=[13,15.5]) translate([20,i*k,j*k]) rotate([0,-90,0]) rotate([0,0,90]) cylinder(h=70, r=1.8, $fn=30);
+      hull() for (k=[13,15.5]) translate([1,i*k,j*k]) rotate([0,-90,0]) rotate([0,0,90]) cylinder(h=9, r=3.1, $fn=30);
     }
 
     // Material saving cutout
@@ -43,7 +43,9 @@ module x_end_motor()
     }
     x_end_motor_holes();
   }
+
+  // % translate([-23.57,32,30.25]) rotate([0,90,0]) import("../inc/nema14.stl", convexity=3);
+  % translate([-40.3,32,30.25]) rotate([0,90,0]) import("../inc/nema17.stl", convexity=3);
 }
 
 x_end_motor();
-% translate([-23.57,32,30.25]) rotate([0,90,0]) import("../inc/nema14.stl", convexity=3);
