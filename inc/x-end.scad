@@ -14,6 +14,7 @@ module x_end_base()
   // Main block
   height=58;
   translate([-15,-9,height/2]) cube([17,39,height], center=true);
+  translate([-1,-9,10.2/2]) cube([12,5,10.2], center=true);
 
   // Bearing holder
   vertical_bearing_base();
